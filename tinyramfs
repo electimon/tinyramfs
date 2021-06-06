@@ -293,6 +293,7 @@ copy_modules()
             "${moddir}/${kernel}/kernel/drivers/ata" \
             "${moddir}/${kernel}/kernel/drivers/scsi" \
             "${moddir}/${kernel}/kernel/drivers/block" \
+            "${moddir}/${kernel}/kernel/drivers/input" \
             "${moddir}/${kernel}/kernel/drivers/virtio" \
             "${moddir}/${kernel}/kernel/drivers/usb/host" \
             "${moddir}/${kernel}/kernel/drivers/usb/storage" \
@@ -334,10 +335,10 @@ set -ef
 
 parse_arguments "$@"
 prepare_initramfs
+copy_modules
 
 for _hook in $hooks; do
     copy_hook "$_hook"
 done
 
-copy_modules
 make_initramfs
